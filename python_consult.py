@@ -19,9 +19,9 @@ def main():
 
     area = input('Qual a área de preferência? (urbana, rural): ')
 
-    lingua = input('Qual a língua nativa de preferência? (inglês, espanhol, português): ')
+    lingua = input('Qual a língua nativa de preferência? (ingles, espanhol, portugues): ')
     
-    motivacao = input('Qual a sua motivação de mudança? (educação, trabalho, "melhoria de vida"): ')
+    motivacao = input('Qual a sua motivação de mudança? (educacao, trabalho, melhoria_de_vida): ')
     
     consulta_pais(clima, area, lingua, motivacao)
 
