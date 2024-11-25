@@ -43,3 +43,10 @@ pais(frio, rural, espanhol, melhoria_de_vida, 'Andorra').
 pais(frio, rural, portugues, educacao, 'Austria').
 pais(frio, rural, portugues, trabalho, 'Eslovenia').
 pais(frio, rural, portugues, melhoria_de_vida, 'Letonia').
+
+pais_flexivel(Clima, Area, Lingua, Motivacao, Pais) :-
+    (var(Clima) ; Clima = quente ; Clima = frio),
+    (var(Area) ; Area = urbana ; Area = rural),
+    (var(Lingua) ; Lingua = ingles ; Lingua = espanhol ; Lingua = portugues),
+    (var(Motivacao) ; Motivacao = educacao ; Motivacao = trabalho ; Motivacao = melhoria_de_vida),
+    pais(Clima, Area, Lingua, Motivacao, Pais).

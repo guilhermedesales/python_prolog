@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recomendação de País</title>
+  </head>
+  <body>
+    <h1>Recomendações de País</h1>
+    <form method="POST">
+      <label for="consulta"
+        >Digite a descrição de um país ideal para
+        você:(clima/area/lingua/motivação)</label
+      ><br />
+      <textarea
+        id="consulta"
+        name="consulta"
+        rows="4"
+        cols="50"
+        placeholder="Exemplo: Gosto de Clima frio e area urbana, gostaria de um pais que fale inglês e o motivo de minha mudança é trabalho."
+      ></textarea
+      ><br /><br />
+      <button type="submit">Pesquisar</button>
+    </form>
+
+    {% if resultado %}
+    <h2>Resultado:</h2>
+    <p>{{ resultado }}</p>
+    {% endif %}
+  </body>
+</html>

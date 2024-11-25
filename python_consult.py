@@ -1,29 +1,55 @@
-from pyswip import Prolog # pip3 install pyswip Collecting pyswip
+from flask import Flask, render_template, request
+from pyswip import Prolog
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from unidecode import unidecode
 
+nltk.download("punkt")
+
+nltk.download("stopwords")
+
+app = Flask(__name__)
 prolog = Prolog()
 prolog.consult('paises.pl')
 
-def consulta_pais(clima, area, lingua, motivacao):
-    consulta = f"pais({clima}, {area}, {lingua}, {motivacao}, Pais)"
-    resultado = list(prolog.query(consulta))
+def process_input(user_input):
+    user_input = user_input.replace('ç', 'c')# substitui ç por c
+    user_input = unidecode(user_input.lower())#ignora os acentos e deixa os texto minusculos
+    tokens = word_tokenize(user_input)
+
+    stop_words = set(stopwords.words('portuguese'))
+    filtered_tokens = [word for word in tokens if word not in stop_words]
+
+    clima = next((word for word in filtered_tokens if word in ['quente', 'frio', 'moderado']), None)
+    area = next((word for word in filtered_tokens if word in ['urbana', 'rural']), None)
+    lingua = next((word for word in filtered_tokens if word in ['ingles', 'espanhol', 'portugues']), None)
+    motivacao = next((word for word in filtered_tokens if word in ['educacao', 'trabalho', 'melhoria_de_vida']), None)
+
+    return clima, area, lingua, motivacao
+
+@app.route("/", methods=["GET", "POST"])
+def consulta_pais():
     
-    if resultado:
-        pais = resultado[0]['Pais']
-        print(f'O país sugerido é: {pais}')
-    else:
-        print('algum erro de digitação')
+    resultado = None
+    if request.method == "POST":
 
-def main():
+        user_input = request.form["consulta"]
+        clima, area, lingua, motivacao = process_input(user_input)
 
-    clima = input('Qual o clima de preferência? (quente, frio): ')
+        consulta = f"pais_flexivel({clima if clima else '_'}, {area if area else '_'}, {lingua if lingua else '_'}, {motivacao if motivacao else '_'}, Pais)"
 
-    area = input('Qual a área de preferência? (urbana, rural): ')
+        resultado_query = list(prolog.query(consulta))# parar de duplicar paises
 
-    lingua = input('Qual a língua nativa de preferência? (ingles, espanhol, portugues): ')
-    
-    motivacao = input('Qual a sua motivação de mudança? (educacao, trabalho, melhoria_de_vida): ')
-    
-    consulta_pais(clima, area, lingua, motivacao)
+        if resultado_query:
+            #resultado = resultado_query[0]["Pais"]
+            resultado = list(set([item["Pais"] for item in resultado_query]))
+        else:
+            resultado = "Nenhum pais encontrado."
+        #else:
+        #    resultado = "Tente ser mais específico."
 
-if __name__ == '__main__':
-    main()
+    return render_template("index.html", resultado=resultado)
+
+if __name__ == "__main__":
+    app.run(debug=True)
