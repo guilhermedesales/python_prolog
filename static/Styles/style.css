@@ -1,0 +1,136 @@
+body{
+    background-color: rgb(34, 34, 34);
+    color: white;
+    font-family: poppinsregular;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#title{
+    flex-direction: column;
+    line-height: 10px;
+}
+
+li{
+    display: inline-block;
+    margin: 20px;
+}
+
+a{
+    color: white
+}
+
+#agende-viagem{
+    border: 2px solid #87C7F6;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+#agende-viagem:hover{
+    background-color: #87c8f6dc;
+    color: white;
+    transition: 0.3s;
+}
+
+h1{
+    font-weight: 200;
+}
+
+main{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+h2{
+    font-size: 53px;
+    line-height: 10px;
+    font-family: poppinsmedium;
+}
+
+span{
+    color: #87C7F6;
+}
+
+p{
+    line-height: 20px;
+    max-width: 550px;
+    font-family: poppinslight;
+    font-size: 17px;
+}
+
+img{
+    width: 400px;
+    margin-left: 60px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+form [type="submit"]{
+    height: 50px;
+    width: 40%;
+    background-color: #87c8f6dc;
+    color: white;
+    font-weight: bold;
+
+}
+
+form [type="submit"]:hover{
+    cursor: pointer;
+
+}
+
+
+input{
+    margin-top: 20px;
+    height: 20px;
+    padding: 15px;
+    border-radius: 20px;
+    border: none;
+    font-size:17px;
+}
+
+#pais-selecionado{
+    background: rgb(59, 59, 59);
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-left: 10px;
+    border-radius: 20px;
+    width: 70%;
+}
+
+#pais-selecionado-titulo{
+    font-size: 28px;
+    font-weight: 200;
+    font-family: poppinsmedium;
+}
+
+#pais-selecionado-subtitulo{
+    font-family: poppinslight;
+    max-width: 100%;
+    text-align: justify;
+}
+
+#mensagem{
+    border: solid rgb(171, 76, 76);
+    padding: 15px;
+    border-radius: 15px;
+    font-family: poppinslight;
+    font-size: 16px;
+    font-weight: 100px;
+    text-align: Justify;
+    width: 100%
+}

@@ -1,31 +1,75 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recomendação de País</title>
+    <link href="/static/Styles/style.css" rel="stylesheet" />
+    <link href="/static/Styles/media.css" rel="stylesheet" />
+    <link href="/static/Styles/fonts.css" rel="stylesheet" />
+    <title>Projeto - PSE</title>
   </head>
   <body>
-    <h1>Recomendações de País</h1>
-    <form method="POST">
-      <label for="consulta"
-        >Digite a descrição de um país ideal para
-        você:(clima/area/lingua/motivação)</label
-      ><br />
-      <textarea
-        id="consulta"
-        name="consulta"
-        rows="4"
-        cols="50"
-        placeholder="Exemplo: Gosto de Clima frio e area urbana, gostaria de um pais que fale inglês e o motivo de minha mudança é trabalho."
-      ></textarea
-      ><br /><br />
-      <button type="submit">Pesquisar</button>
-    </form>
+    <header>
+      <div id="title">
+        <h1>Formulário</h1>
+        <h1>Países</h1>
+      </div>
+
+      <ul>
+        <a href="https://www.trivago.com.br/" target="_blank" id="agende-viagem"
+          ><li>Agende sua viagem</li></a
+        >
+      </ul>
+    </header>
+
+    <br /><br />
+
+    <main>
+      <aside>
+        <h2><span>Qual país mais combina</span></h2>
+        <h2>com você?</h2>
+
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s.
+        </p>
+        <form method="POST" action="/">
+          <input type="text" name="consulta" placeholder="Digite aqui..." />
+          <input type="submit" value="Confirmar >" />
+        </form>
+      </aside>
+
+      <article>
+        <img src="/static/components/images/internet.png" alt="mundo" />
+      </article>
+    </main>
+
+    <br /><br /><br /><br /><br />
 
     {% if resultado %}
-    <h2>Resultado:</h2>
-    <p>{{ resultado }}</p>
-    {% endif %}
+    <div>
+      <h2>Países encontrados:</h2>
+      <br /><br />
+
+      <ul>
+        {% for pais in resultado %}
+        <li>
+          <div id="pais-selecionado">
+            <h3 id="pais-selecionado-titulo">{{ pais.pais }}</h3>
+            <p id="pais-selecionado-subtitulo">{{ pais.descricao }}</p>
+          </div>
+        </li>
+        <br /><br />
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %} {% if mensagem %}
+
+    <div>
+      <p id="mensagem">{{ mensagem }}</p>
+    </div>
+
+        {% endif %}
   </body>
 </html>
